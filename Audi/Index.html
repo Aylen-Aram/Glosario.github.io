@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Glosario</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+                background: url('https://i.pinimg.com/736x/36/ab/99/36ab99891eaee4fc8f4c6050f72fc930.jpg') no-repeat center center fixed;
+                background-size: contain;
+                background-color: rgb(104, 195, 97);
+                background-blend-mode: overlay;
+            }
+            h1 {
+                font-family: "Brush Script MT", cursive;
+                font-size: 74px;
+                color: black; /* Relleno negro */
+                text-align: left; /* Posicionarlo a la izquierda */
+                background-color: white; /* Fondo blanco */
+                padding: 20px;
+                border-radius: 30px; /* Bordes redondeados para la forma de nube */
+                box-shadow: 10px 10px 30px rgba(0, 0, 255, 0.7); /* Sombra intensa azul */
+                display: inline-block; /* Para que el título ocupe solo el espacio necesario */
+                margin-left: 20px; /* Margen a la izquierda */
+            }
+            .folder {
+                display: inline-block;
+                margin: 20px; /* Aumentado margen entre carpetas */
+                padding: 10px;
+                background-color: black;
+                color: white;
+                font-size: 18px;
+                font-weight: bold;
+                font-style: italic;
+                border-radius: 5px;
+                text-align: center;
+                width: 150px;
+            }
+            .audios {
+                display: inline-block;
+                margin: 20px; /* Aumentado margen entre grupos de carpetas */
+                vertical-align: top;
+            }
+            .audio-item {
+                margin: 10px 0;
+                text-align: center;
+            }
+            .audio-item span {
+                display: block;
+                font-size: 16px;
+                font-weight: bold;
+                font-style: italic;
+                background-color: #FF8C00; /* Anaranjado oscuro brillante */
+                color: black; /* Texto en negro */
+                padding: 5px;
+                border-radius: 5px;
+            }
+            .folder-group {
+                display: flex;
+                flex-wrap: wrap;
+            }
+            .folder-group .audios {
+                width: 30%; /* Cada "audios" ocupa un 30% del ancho del contenedor */
+            }
+        </style>
+    </head>        
+<body>
+    <h1>Glosario</h1>
+    <div id="folders-container"></div>
+
+    <script>
+        // Datos de ejemplo
+        const glosarioData = {
+            "A": [
+                { nombre: "ACCESO DIRECTO", archivo: "A_1.mp3" },
+                { nombre: "ACCIÓN", archivo: "A_2.mp3" },
+                { nombre: "AJUSTE", archivo: "A_3.mp3" }
+            ],
+            "B": [
+                { nombre: "BINARIO", archivo: "B_1.mp3" },
+                { nombre: "BIOS", archivo: "B_2.mp3" },
+                { nombre: "BIT", archivo: "B_3.mp3" }
+            ],
+            "C": [
+                { nombre: "CACHÉ", archivo: "C_1.mp3" },
+                { nombre: "CAMPO", archivo: "C_2.mp3" },
+                { nombre: "CARPETA", archivo: "C_3.mp3" }
+            ],
+            "D": [
+                { nombre: "DATO", archivo: "D_1.mp3" },
+                { nombre: "DIGITAL", archivo: "D_2.mp3" },
+                { nombre: "DRIVE", archivo: "D_3.mp3" }
+            ],
+            "E": [
+                { nombre: "EGA", archivo: "E_1.mp3" },
+                { nombre: "ENIAC", archivo: "E_2.mp3" },
+                { nombre: "ESTILO", archivo: "E_3.mp3" }
+            ],
+            "F": [
+                { nombre: "FAT", archivo: "F_1.mp3" },
+                { nombre: "FDDI", archivo: "F_2.mp3" },
+                { nombre: "FILA", archivo: "F_3.mp3" }
+            ],
+            "G": [
+                { nombre: "GENERACION DE COMPUTADORAS", archivo: "G_1.mp3" },
+                { nombre: "GIF", archivo: "G_2.mp3" },
+                { nombre: "GIGABYTE", archivo: "G_3.mp3" }
+            ],
+            "H": [
+                { nombre: "HARDWARE", archivo: "H_1.mp3" },
+                { nombre: "HIPERTEXTO", archivo: "H_2.mp3" },
+                { nombre: "HIPERVINCULO", archivo: "H_3.mp3" }
+            ],
+            "I": [
+                { nombre: "ICONO DE DOCUMENTO", archivo: "I_1.mp3" },
+                { nombre: "ICONO DE GRUPO", archivo: "I_2.mp3" },
+                { nombre: "ICONO", archivo: "I_3.mp3" }
+            ],
+            "J": [
+                { nombre: "JAVA", archivo: "J_1.mp3" },
+                { nombre: "JOYSTICK", archivo: "J_2.mp3" },
+                { nombre: "JPG", archivo: "J_3.mp3" }
+            ],
+            "L": [
+                { nombre: "LAN SERVER", archivo: "L_1.mp3" },
+                { nombre: "LAN", archivo: "L_2.mp3" },
+                { nombre: "LANTASTIC", archivo: "L_3.mp3" }
+            ],
+            "M": [
+                { nombre: "MACRO COMPUTADORA", archivo: "M_1.mp3" },
+                { nombre: "MAN", archivo: "M_2.mp3" },
+                { nombre: "MARGEN", archivo: "M_3.mp3" }
+            ],
+            "N": [
+                { nombre: "NAVEGADOR", archivo: "N_1.mp3" },
+                { nombre: "NETBIOS", archivo: "N_2.mp3" },
+                { nombre: "NETIQUETTE", archivo: "N_3.mp3" }
+            ],
+            "O": [
+                { nombre: "OBJETO", archivo: "O_1.mp3" },
+                { nombre: "ON-LINE", archivo: "O_2.mp3" },
+                { nombre: "OSI", archivo: "O_3.mp3" }
+            ],
+            "P": [
+                { nombre: "PATH", archivo: "P_1.mp3" },
+                { nombre: "PC", archivo: "P_2.mp3" },
+                { nombre: "PCX", archivo: "P_3.mp3" }
+            ],
+            "R": [
+                { nombre: "RAM", archivo: "R_1.mp3" },
+                { nombre: "REAL", archivo: "R_2.mp3" },
+                { nombre: "RED", archivo: "R_3.mp3" }
+            ],
+            "S": [
+                { nombre: "SERVIDOR", archivo: "S_1.mp3" },
+                { nombre: "SISTEMA", archivo: "S_2.mp3" },
+                { nombre: "STRING", archivo: "S_3.mp3" }
+            ],
+            "T": [
+                { nombre: "TABLA", archivo: "R_1.mp3" },
+                { nombre: "TABLA DE CONTENIDOS", archivo: "H_2.mp3" },
+                { nombre: "TIF", archivo: "W_3.mp3" }
+            ],
+            "U": [
+                { nombre: "UNIX", archivo: "A_1.mp3" },
+                { nombre: "URL", archivo: "C_2.mp3" },
+                { nombre: "USUARIO", archivo: "D_3.mp3" }
+            ],
+            "V": [
+                { nombre: "VECTOR", archivo: "I_1.mp3" },
+                { nombre: "VGA", archivo: "J_2.mp3" },
+                { nombre: "VIDEO", archivo: "M_3.mp3" }
+            ],
+            "W": [
+                { nombre: "WAN", archivo: "W_1.mp3" },
+                { nombre: "WINDOWS", archivo: "W_2.mp3" },
+                { nombre: "WWW", archivo: "W_3.mp3" }
+            ],
+        };
+
+        const container = document.getElementById('folders-container');
+        let folderGroup = document.createElement('div');
+        folderGroup.classList.add('folder-group');
+        let folderCount = 0;
+
+        // Crear carpetas y audios
+        for (const letra in glosarioData) {
+            const audiosDiv = document.createElement('div');
+            audiosDiv.classList.add('audios');
+
+            const folderTitle = document.createElement('div');
+            folderTitle.classList.add('folder');
+            folderTitle.textContent = `Carpeta ${letra}`;
+            audiosDiv.appendChild(folderTitle);
+
+            glosarioData[letra].forEach(audio => {
+                const audioDiv = document.createElement('div');
+                audioDiv.classList.add('audio-item');
+
+                const label = document.createElement('span');
+                label.textContent = audio.nombre;
+                audioDiv.appendChild(label);
+
+                const audioElement = document.createElement('audio');
+                audioElement.controls = true;
+                audioElement.src = audio.archivo;
+                audioDiv.appendChild(audioElement);
+
+                audiosDiv.appendChild(audioDiv);
+            });
+
+            folderGroup.appendChild(audiosDiv);
+            folderCount++;
+
+            // Después de agregar 3 carpetas, iniciar un nuevo grupo
+            if (folderCount % 3 === 0) {
+                container.appendChild(folderGroup);
+                folderGroup = document.createElement('div');
+                folderGroup.classList.add('folder-group');
+            }
+        }
+
+        // Agregar el último grupo si queda menos de 3 carpetas
+        if (folderGroup.children.length > 0) {
+            container.appendChild(folderGroup);
+        }
+    </script>
+</body>
+</html>
